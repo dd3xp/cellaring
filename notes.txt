@@ -1,0 +1,10 @@
+gradlew build生成mod文件。
+gradlew runClient用于启动含有该mod的mc游戏。
+
+物品类的命名通常以 Item 开头，后面是物品的名称。
+方块类的命名通常以 Block 开头，后面是方块的名称。
+方块实体（TileEntity）通常以 Tile 或 TileEntity 开头，后面是方块的功能名称。
+事件处理器的命名以 EventHandler 结尾，表示监听器的作用。
+GUI类的命名通常以 Gui 开头，后面是功能描述。
+渲染类的命名通常以 Renderer 或 Render 开头，后面是具体渲染对象。
+配方类以 Recipe 开头，表示某种特殊配方。
