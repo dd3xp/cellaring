@@ -1,5 +1,6 @@
 gradlew build生成mod文件。
 gradlew runClient用于启动含有该mod的mc游戏。
+gradlew clean build用于清除缓存后重新构建。
 
 物品类的命名通常以 Item 开头，后面是物品的名称。
 方块类的命名通常以 Block 开头，后面是方块的名称。
@@ -8,3 +9,6 @@ gradlew runClient用于启动含有该mod的mc游戏。
 GUI类的命名通常以 Gui 开头，后面是功能描述。
 渲染类的命名通常以 Renderer 或 Render 开头，后面是具体渲染对象。
 配方类以 Recipe 开头，表示某种特殊配方。
+
+生成密钥：keytool -genkey -alias signFiles -keystore examplestore.jks
+查看密钥：keytool -list -alias signFiles -keystore examplestore.jks

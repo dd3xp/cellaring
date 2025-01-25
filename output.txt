@@ -1,0 +1,239 @@
+File Structure:
+- java\com\dd3xp\cellaring\client\ClientProxy.java
+- java\com\dd3xp\cellaring\common\Cellaring.java
+- java\com\dd3xp\cellaring\common\IProxy.java
+- java\com\dd3xp\cellaring\common\ModBlocks.java
+- java\com\dd3xp\cellaring\common\ModCreativeTabs.java
+- java\com\dd3xp\cellaring\common\ModItems.java
+- java\com\dd3xp\cellaring\common\blocks\BlockSecretRoom.java
+- java\com\dd3xp\cellaring\server\ServerProxy.java
+- resources\assets\cellaring\blockstates\secret_room_block.json
+- resources\assets\cellaring\models\block\secret_room_block.json
+- resources\assets\cellaring\models\item\secret_room_block.json
+
+# File: java\com\dd3xp\cellaring\client\ClientProxy.java
+package com.dd3xp.cellaring.client;
+
+import com.dd3xp.cellaring.common.IProxy;
+import com.dd3xp.cellaring.common.ModBlocks;
+
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+
+public class ClientProxy implements IProxy {
+    @Override
+    public void preInit() {
+        // 注册密室方块的模型
+        ModelLoader.setCustomModelResourceLocation(
+            net.minecraft.item.Item.getItemFromBlock(ModBlocks.SECRET_ROOM_BLOCK),
+            0,
+            new ModelResourceLocation(ModBlocks.SECRET_ROOM_BLOCK.getRegistryName(), "inventory")
+        );
+    }
+    
+    @Override
+    public void init() {
+        // 客户端初始化逻辑
+        System.out.println("ClientProxy: Init");
+    }
+
+    @Override
+    public void postInit() {
+        // 客户端后初始化逻辑
+        System.out.println("ClientProxy: PostInit");
+    }
+}
+
+
+# File: java\com\dd3xp\cellaring\common\Cellaring.java
+package com.dd3xp.cellaring.common;
+
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+
+import org.apache.logging.log4j.Logger;
+
+@Mod(
+    modid = Cellaring.MODID,
+    name = Cellaring.NAME,
+    version = Cellaring.VERSION
+)
+@EventBusSubscriber
+public class Cellaring {
+    public static final String MODID = "cellaring";
+    public static final String NAME = "Cellaring";
+    public static final String VERSION = "0.0.0";
+
+    @SidedProxy(clientSide = "com.dd3xp.cellaring.client.ClientProxy", serverSide = "com.dd3xp.cellaring.server.ServerProxy")
+    public static IProxy proxy;
+
+    private static Logger logger;
+
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        logger = event.getModLog();
+        logger.info("Cellaring Mod: Pre-initialization stage started.");
+        proxy.preInit();
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        logger.info("Cellaring Mod: Initialization stage started.");
+        proxy.init();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        logger.info("Cellaring Mod: Post-initialization stage started.");
+        proxy.postInit();
+    }
+
+    @SubscribeEvent
+    public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+        ModBlocks.onRegisterBlocks(event);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterItems(RegistryEvent.Register<Item> event) {
+        ModItems.onRegisterItems(event);
+    }
+}
+
+
+# File: java\com\dd3xp\cellaring\common\IProxy.java
+package com.dd3xp.cellaring.common;
+
+public interface IProxy {
+    void preInit();
+    void init();
+    void postInit();
+}
+
+# File: java\com\dd3xp\cellaring\common\ModBlocks.java
+package com.dd3xp.cellaring.common;
+
+import com.dd3xp.cellaring.common.blocks.BlockSecretRoom;
+import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+public class ModBlocks {
+    public static final Block SECRET_ROOM_BLOCK = new BlockSecretRoom();
+
+    @SubscribeEvent
+    public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(
+                SECRET_ROOM_BLOCK // 如果有更多方块，直接在此处添加
+        );
+    }
+}
+
+# File: java\com\dd3xp\cellaring\common\ModCreativeTabs.java
+package com.dd3xp.cellaring.common;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+
+public class ModCreativeTabs {
+    public static final CreativeTabs SECRET_TAB = new CreativeTabs("secretTab") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ModBlocks.SECRET_ROOM_BLOCK);
+        }
+    };
+}
+
+
+# File: java\com\dd3xp\cellaring\common\ModItems.java
+package com.dd3xp.cellaring.common;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+public class ModItems {
+    @SubscribeEvent
+    public static void onRegisterItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().registerAll(
+                new ItemBlock(ModBlocks.SECRET_ROOM_BLOCK).setRegistryName(ModBlocks.SECRET_ROOM_BLOCK.getRegistryName())
+        );
+    }
+}
+
+
+# File: java\com\dd3xp\cellaring\common\blocks\BlockSecretRoom.java
+package com.dd3xp.cellaring.common.blocks;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import com.dd3xp.cellaring.common.ModCreativeTabs;
+
+public class BlockSecretRoom extends Block {
+    public BlockSecretRoom() {
+        super(Material.ROCK);
+        this.setBlockUnbreakable();
+        this.setResistance(6000000.0f);
+        this.setCreativeTab(ModCreativeTabs.SECRET_TAB);
+        this.setUnlocalizedName("secret_room_block");
+        this.setRegistryName("secret_room_block");
+    }
+}
+
+
+# File: java\com\dd3xp\cellaring\server\ServerProxy.java
+package com.dd3xp.cellaring.server;
+
+import com.dd3xp.cellaring.common.IProxy;
+
+public class ServerProxy implements IProxy {
+    @Override
+    public void preInit() {
+        // 服务端预初始化逻辑
+        System.out.println("ServerProxy: PreInit");
+    }
+
+    @Override
+    public void init() {
+        // 服务端初始化逻辑
+        System.out.println("ServerProxy: Init");
+    }
+
+    @Override
+    public void postInit() {
+        // 服务端后初始化逻辑
+        System.out.println("ServerProxy: PostInit");
+    }
+}
+
+
+# File: resources\assets\cellaring\blockstates\secret_room_block.json
+{
+  "variants": {
+    "normal": { "model": "cellaring:secret_room_block" }
+  }
+}
+
+# File: resources\assets\cellaring\models\block\secret_room_block.json
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "cellaring:blocks/secret_room_block"
+  }
+}
+
+
+# File: resources\assets\cellaring\models\item\secret_room_block.json
+{
+    "parent": "cellaring:block/secret_room_block"
+}
+
