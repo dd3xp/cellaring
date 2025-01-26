@@ -1,14 +1,14 @@
 [
 {
-  "modid": "cellaring",
-  "name": "Cellaring",
-  "description": "Cellaring is a minecraft mod.",
+  "modid": "shelter",
+  "name": "Shelter",
+  "description": "Shelter is a minecraft mod.",
   "version": "0.0.0",
   "mcversion": "1.12.2",
-  "url": "https://github.com/dd3xp/cellaring",
+  "url": "https://github.com/dd3xp/shelter",
   "updateUrl": "",
   "authorList": ["dd3xp"],
-  "credits": "I 'd like to thanks my dad and my mom, especially the forge team as well.",
+  "credits": "I 'd like to thanks to the forge developers.",
   "screenshots": [],
   "dependencies": []
 }

@@ -1,6 +1,6 @@
-package com.dd3xp.cellaring.server;
+package com.dd3xp.shelter.server;
 
-import com.dd3xp.cellaring.common.IProxy;
+import com.dd3xp.shelter.common.IProxy;
 
 public class ServerProxy implements IProxy {
     @Override

@@ -1,4 +1,4 @@
-package com.dd3xp.cellaring.common;
+package com.dd3xp.shelter.common;
 
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,17 +15,17 @@ import net.minecraft.item.Item;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
-    modid = Cellaring.MODID,
-    name = Cellaring.NAME,
-    version = Cellaring.VERSION
+    modid = Shelter.MODID,
+    name = Shelter.NAME,
+    version = Shelter.VERSION
 )
 @EventBusSubscriber
-public class Cellaring {
-    public static final String MODID = "cellaring";
-    public static final String NAME = "Cellaring";
+public class Shelter {
+    public static final String MODID = "shelter";
+    public static final String NAME = "Shelter";
     public static final String VERSION = "0.0.0";
 
-    @SidedProxy(clientSide = "com.dd3xp.cellaring.client.ClientProxy", serverSide = "com.dd3xp.cellaring.server.ServerProxy")
+    @SidedProxy(clientSide = "com.dd3xp.shelter.client.ClientProxy", serverSide = "com.dd3xp.shelter.server.ServerProxy")
     public static IProxy proxy;
 
     private static Logger logger;
@@ -33,19 +33,19 @@ public class Cellaring {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
-        logger.info("Cellaring Mod: Pre-initialization stage started.");
+        logger.info("Shelter Mod: Pre-initialization stage started.");
         proxy.preInit();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        logger.info("Cellaring Mod: Initialization stage started.");
+        logger.info("Shelter Mod: Initialization stage started.");
         proxy.init();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        logger.info("Cellaring Mod: Post-initialization stage started.");
+        logger.info("Shelter Mod: Post-initialization stage started.");
         proxy.postInit();
     }
 
