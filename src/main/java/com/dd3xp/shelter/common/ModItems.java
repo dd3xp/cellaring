@@ -1,7 +1,7 @@
 package com.dd3xp.shelter.common;
 
-import com.dd3xp.shelter.common.Items.ItemSurvivorSlab;
 import com.dd3xp.shelter.common.blocks.BlockShelter;
+import com.dd3xp.shelter.common.items.ItemSurvivorSlab;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,6 +23,6 @@ public class ModItems {
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         // Items
-        // SURVIVOR_SLAB.initModel();
+        SURVIVOR_SLAB.initModel();
     }
 }

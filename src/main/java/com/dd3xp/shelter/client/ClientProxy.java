@@ -13,11 +13,11 @@ public class ClientProxy implements IProxy {
    
    @Override
    public void init() {
-       System.out.println("ClientProxy: Init");
+        System.out.println("ClientProxy: Init");
    }
 
    @Override
    public void postInit() {
-       System.out.println("ClientProxy: PostInit");
+        System.out.println("ClientProxy: PostInit");
    }
 }

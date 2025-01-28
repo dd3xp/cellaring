@@ -1,4 +1,4 @@
-package com.dd3xp.shelter.common.Items;
+package com.dd3xp.shelter.common.items;
 
 import com.dd3xp.shelter.common.ModCreativeTabs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
