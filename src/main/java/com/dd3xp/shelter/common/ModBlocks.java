@@ -8,14 +8,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlocks {
-    public static final Block SHELTER_BLOCK = BlockShelter.getBlock();
+    // Blocks
+    public static final BlockShelter SHELTER_BLOCK = BlockShelter.getBlock();
 
     public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+        // Blocks
         BlockShelter.registerBlock(event.getRegistry());
+        
     }
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
-        ((BlockShelter)SHELTER_BLOCK).initBlockModel();
+        // Blocks
+        SHELTER_BLOCK.initModel();
     }
 }

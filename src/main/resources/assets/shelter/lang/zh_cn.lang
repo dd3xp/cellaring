@@ -1,3 +1,6 @@
 tile.shelter_block.name=庇护方块
 
-itemGroup.shelterTab=庇护所：方块
+item.survivor_slab.name=幸存者石板
+
+itemGroup.shelterBlocksTab=庇护所：方块
+itemGroup.shelterItemsTab=庇护所：物品

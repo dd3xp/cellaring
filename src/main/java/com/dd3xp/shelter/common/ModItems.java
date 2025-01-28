@@ -1,5 +1,6 @@
 package com.dd3xp.shelter.common;
 
+import com.dd3xp.shelter.common.Items.ItemSurvivorSlab;
 import com.dd3xp.shelter.common.blocks.BlockShelter;
 
 import net.minecraft.item.Item;
@@ -8,14 +9,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItems {
-    private static final BlockShelter SHELTER_BLOCK = (BlockShelter)ModBlocks.SHELTER_BLOCK;
+    // Items
+    public static final ItemSurvivorSlab SURVIVOR_SLAB = ItemSurvivorSlab.getItem();
 
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
+        // Items
+        ItemSurvivorSlab.registerItem(event.getRegistry());
+
+        // ItemBlocks
         BlockShelter.registerItemBlock(event.getRegistry());
     }
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
-        SHELTER_BLOCK.initItemModel();
+        // Items
+        // SURVIVOR_SLAB.initModel();
     }
 }

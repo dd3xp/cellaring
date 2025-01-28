@@ -20,22 +20,13 @@ public class BlockShelter extends Block {
         super(Material.ROCK);
         this.setBlockUnbreakable();
         this.setResistance(6000000.0f);
-        this.setCreativeTab(ModCreativeTabs.BLOCKS_TAB);
         this.setUnlocalizedName("shelter_block");
         this.setRegistryName("shelter_block");
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public void initBlockModel() {
-        ModelLoader.setCustomModelResourceLocation(
-            Item.getItemFromBlock(this),
-            0,
-            new ModelResourceLocation(getRegistryName(), "inventory")
-        );
+        this.setCreativeTab(ModCreativeTabs.BLOCKS_TAB);
     }
 
     @SideOnly(Side.CLIENT)
-    public void initItemModel() {
+    public void initModel() {
         ModelLoader.setCustomModelResourceLocation(
             ITEM_BLOCK,
             0,
